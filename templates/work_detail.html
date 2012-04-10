@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% from "_helpers.html" import render_work_items %}
+
+{% block title %}{{ page.meta.work_title }} {{ super() }}{% endblock %}
+
+{% block jsblock %}
+<script src="{{ url_for('static', filename='js/swipe-1.0.0.min.js') }}"></script>
+<script>
+var slider = new Swipe($('.work-slider')[0], {
+    speed: 400,
+    auto: 3000,
+    callback: function() {
+        var position = '#pos-' + slider.getPos();
+        $('.work-slider-position li').removeClass('active');
+        $('.work-slider-position').find(position).addClass('active');
+    }
+});
+
+$('.work-slider-buttons.prev').on('click', function(){
+    slider.prev();
+});
+
+$('.work-slider-buttons.next').on('click', function(){
+    slider.next();
+});
+
+$('.work-slider-position li').on('click', function(e) {
+    e.preventDefault();
+
+    var index = $(this).index();
+    slider.slide(index, 400);
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="work-detail-content span12">
+        <div class="work-slider">
+            <ul class="work-slider-items">
+                {% for image in page.work_images %}
+                    <li><img src="{{ url_for('static', filename='img/work/' + image) }}"></li>
+                {% endfor %}
+            </ul>
+            <button class="work-slider-buttons prev">&#x25C0;</button>
+            <button class="work-slider-buttons next">&#x25B6;</button>
+        </div>
+        <ul class="work-slider-position">
+            {% for image in page.work_images %}
+                <li id="pos-{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}>
+                    <a href="#">•</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="project-meta row">
+    <h1 class="title span12">{{ page.meta.work_title }} <small>{{ page.meta.work_description }}</small></h1>
+    <span class="description span12">
+        <p class="links">
+            {% for link in page.meta.work_links %}
+                <a href="{{ link.link_src }}" target="_blank">{{ link.link_name }} »</a>
+            {% endfor %}
+        </p>
+    </span>
+</div>
+
+<hr>
+
+{{ render_work_items(pages) }}
+{% endblock %}

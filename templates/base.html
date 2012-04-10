@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>{% block title %}| Jason Filipe{% endblock %}</title>
+    <meta name="description" content="mobile sites">
+    <meta name="author" content="Jason Filipe">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+    <script>window.Modernizr || document.write('<script src="{{ url_for('static', filename='js/modernizr-2.0.6.min.js') }}"><\/script>')</script>
+</head>
+
+<body>
+    <div class="container">
+        {% include 'header.html' %}
+        {% block content %}
+        {% endblock %}
+        <hr>
+        {% include 'footer.html' %}
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/jquery-1.7.1.min.js') }}"><\/script>')</script>
+
+    <script>
+        window._gaq = [['_setAccount','UA-361661-7'],['_trackPageview'],['_trackPageLoadTime']];
+        Modernizr.load({
+            load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='js/bootstrap/bootstrap-tooltip.js') }}"></script>
+    <script>
+        $('.social-items').tooltip({
+            selector: "a[rel=tooltip]"
+        })
+    </script>
+
+    <!--[if lt IE 7 ]>
+        <script src="{{ url_for('static', filename='js/dd_belatedpng.js') }}"></script>
+        <script>DD_belatedPNG.fix("img, .png_bg");</script>
+    <![endif]-->
+
+    {% block jsblock %}
+    {% endblock %}
+</body>
+</html>

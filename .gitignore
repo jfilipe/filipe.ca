@@ -1,0 +1,7 @@
+env/
+*.pyc
+.sass-cache
+static/css/*
+static/img/logo-*.png
+static/img/icons-*.png
+build

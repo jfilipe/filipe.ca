@@ -1,0 +1,237 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+$light-blue: rgb(0, 232, 254);
+$light-blue-alpha: rgba(0, 232, 254, 0.5);
+$logo-width: image-width('logo/dirty-normal.png');
+$logo-height: image-height('logo/dirty-normal.png');
+$work-detail-image-width: image-width('work/dubble/1.png');
+
+@import "compass";
+@import "bootstrap/bootstrap";
+@import "bootstrap/responsive";
+
+
+@import "logo/dirty*.png";
+@include all-logo-sprites;
+
+@import "icons/*.png";
+@include all-icons-sprites;
+
+
+body {
+    @include background(image-url('bg.png'));
+    padding-top: 20px;
+    padding-bottom: 60px;
+    border-top: 10px solid $light-blue-alpha;
+    font-family: 'Open Sans';
+}
+
+hr {
+    border-top-color: darken(#eee, 2);
+}
+
+.work-detail-content {
+    text-align: center;
+}
+
+.no-js .work-slider-items li {
+    margin-bottom: 20px;
+}
+
+.work-slider {
+    position: relative;
+
+    .work-slider-items {
+        @extend .unstyled;
+        margin: 0 auto;
+
+        li {
+            @include border-radius(6px);
+            border-left: 1px solid rgba(0,0,0, 0.01);
+            border-right: 1px solid rgba(0,0,0, 0.01);
+        }
+
+        & img {
+            @include box-shadow(rgba(0,0,0, 0.1) 0 2px 1px 1px);
+            @include border-radius(6px);
+        }
+    }
+}
+
+.no-js .work-slider-buttons {
+    display: none;
+}
+
+.work-slider-buttons {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    max-width: $work-detail-image-width/2;
+    bottom: 0;
+    border: none;
+    background: #000;
+    font-size: 250px;
+    font-weight: normal;
+    color: #fff;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    &:hover {
+        opacity: 0.1;
+        bottom: 4px;
+    }
+
+    &.prev {
+        @include border-top-left-radius(6px);
+        @include border-bottom-left-radius(6px);
+        left: 0;
+    }
+
+    &.next {
+        @include border-top-right-radius(6px);
+        @include border-bottom-right-radius(6px);
+        right: 0;
+    }
+}
+
+.no-js .work-slider-position {
+    display: none;
+}
+
+.work-slider-position {
+    @extend .unstyled;
+    padding-top: 20px;
+
+    li {
+        color: #ccc;
+        display: inline;
+        padding: 0 3px;
+        font-style: normal;
+        font-family: sans-serif;
+        font-size: 25px;
+
+        &.active {
+            a {
+                color: $light-blue-alpha;
+            }
+        }
+
+        a {
+            @include link-colors(#ccc);
+            text-decoration: none;
+        }
+    }
+}
+
+.work-items {
+    margin-top: 30px;
+}
+
+.project-meta {
+    .description {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    a {
+        @extend .btn;
+        @extend .btn-large;
+        background-color: $light-blue;
+        background-image: none;
+        border: none;
+        color: #fff;
+        text-shadow: none;
+
+        &:hover, &:active {
+            background-color: darken($light-blue, 10);
+            color: #fff;
+        }
+    }
+}
+.footer {
+    text-align: center;
+}
+
+.tooltip.top {
+    margin-top: 5px;
+}
+
+.social-items {
+    @include inline-list;
+    margin: 0 auto;
+    a {
+        @include squish-text;
+        @include border-radius(100px);
+        @include box-shadow(rgba(0,0,0, 0.2) 0 1px 1px 1px);
+        @include single-transition(opacity, 0.15s, ease-in-out);
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        margin-left: 4px;
+        margin-right: 4px;
+
+        &:hover, &:focus {
+            background-color: $light-blue;
+        }
+    }
+}
+
+.nav {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+a {
+    -webkit-tap-highlight-color: $light-blue-alpha;
+
+    &.thumbnail {
+        @include border-radius(6px);
+        padding: 0;
+        background-color: rgb(0, 232, 254);
+        border: none;
+        @include box-shadow(rgba(0,0,0, 0.2) 0 2px 1px 1px);
+
+        &:hover, &:focus {
+            @include box-shadow(rgba(0,0,0, 0.2) 0 2px 1px 1px);
+        }
+
+        & img {
+            width: 100%;
+            @include border-radius(6px);
+            opacity: 1;
+
+            @include single-transition(opacity, 0.15s, ease-in-out);
+            &:hover, &:active {
+                opacity: 0.4;
+            }
+        }
+    }
+}
+
+@media (max-width: 979px) {
+    .work-slider-buttons {
+        display:none;
+    }
+}
+
+@media (min-width: 980px) {
+    .work-slider-buttons {
+        margin-left: 70px;
+        margin-right: 70px;
+    }
+}
+
+@media (max-width: 767px) {
+    .work-items {
+        margin-left: 0;
+
+        & > li {
+            float: none;
+            display: block;
+            max-width: 100%;
+            margin: 0 auto 18px;
+            text-align: center;
+        }
+    }
+}

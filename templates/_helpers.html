@@ -1,0 +1,11 @@
+{% macro render_work_items(pages) %}
+<ul class="thumbnails work-items">
+    {% for page in pages %}
+        <li class="span6">
+            <a class="thumbnail" href="{{ url_for('page', path=page.path) }}">
+                <img src="{{ url_for('static', filename='img/work/' + page.work_teaser_image) }}" alt="{{ page.work_title }}">
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endmacro %}

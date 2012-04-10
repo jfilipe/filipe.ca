@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% from "_helpers.html" import render_work_items %}
+
+{% block title %}Jason Filipe{% endblock %}
+
+{% block content %}
+{{ render_work_items(pages) }}
+{% endblock %}
